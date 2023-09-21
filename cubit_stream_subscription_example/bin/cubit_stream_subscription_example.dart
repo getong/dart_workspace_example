@@ -21,3 +21,5 @@ Future<void> main(List<String> arguments) async{
   await streamSubscription.cancel();
   await cubit.close();
 }
+
+// see also https://bloclibrary.dev/#/coreconcepts
