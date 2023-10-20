@@ -77,6 +77,70 @@ class MyMessage extends $pb.GeneratedMessage {
   void clearNumber() => clearField(2);
 }
 
+class OtherMessage extends $pb.GeneratedMessage {
+  factory OtherMessage({
+    $core.String? text,
+    $core.int? number,
+  }) {
+    final $result = create();
+    if (text != null) {
+      $result.text = text;
+    }
+    if (number != null) {
+      $result.number = number;
+    }
+    return $result;
+  }
+  OtherMessage._() : super();
+  factory OtherMessage.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory OtherMessage.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'OtherMessage', package: const $pb.PackageName(_omitMessageNames ? '' : 'mypackage'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'text')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'number', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  OtherMessage clone() => OtherMessage()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  OtherMessage copyWith(void Function(OtherMessage) updates) => super.copyWith((message) => updates(message as OtherMessage)) as OtherMessage;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static OtherMessage create() => OtherMessage._();
+  OtherMessage createEmptyInstance() => create();
+  static $pb.PbList<OtherMessage> createRepeated() => $pb.PbList<OtherMessage>();
+  @$core.pragma('dart2js:noInline')
+  static OtherMessage getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<OtherMessage>(create);
+  static OtherMessage? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get text => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set text($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasText() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearText() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get number => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set number($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNumber() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNumber() => clearField(2);
+}
+
 
 const _omitFieldNames = $core.bool.fromEnvironment('protobuf.omit_field_names');
 const _omitMessageNames = $core.bool.fromEnvironment('protobuf.omit_message_names');

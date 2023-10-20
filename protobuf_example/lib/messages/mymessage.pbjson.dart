@@ -27,3 +27,17 @@ final $typed_data.Uint8List myMessageDescriptor = $convert.base64Decode(
     'CglNeU1lc3NhZ2USEgoEdGV4dBgBIAEoCVIEdGV4dBIWCgZudW1iZXIYAiABKAVSBm51bWJlcg'
     '==');
 
+@$core.Deprecated('Use otherMessageDescriptor instead')
+const OtherMessage$json = {
+  '1': 'OtherMessage',
+  '2': [
+    {'1': 'text', '3': 1, '4': 1, '5': 9, '10': 'text'},
+    {'1': 'number', '3': 2, '4': 1, '5': 5, '10': 'number'},
+  ],
+};
+
+/// Descriptor for `OtherMessage`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List otherMessageDescriptor = $convert.base64Decode(
+    'CgxPdGhlck1lc3NhZ2USEgoEdGV4dBgBIAEoCVIEdGV4dBIWCgZudW1iZXIYAiABKAVSBm51bW'
+    'Jlcg==');
+

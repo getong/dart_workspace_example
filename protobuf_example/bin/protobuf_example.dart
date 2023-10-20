@@ -1,5 +1,9 @@
 import 'package:protobuf/protobuf.dart';
 import 'package:protobuf_example/messages/mymessage.pb.dart' as mymessage;
+import 'package:protobuf_example/protobuf_message_num.dart';
+import 'package:protobuf_example/export.dart';
+
+// part 'package:protobuf_example/protobuf_message_num.dart';
 
 void main(List<String> arguments) {
   final requestMessage = mymessage.MyMessage(
@@ -11,4 +15,8 @@ void main(List<String> arguments) {
   print('');
   final decodeMsg = mymessage.MyMessage.fromBuffer(list);
   print('decodeMsg: ${decodeMsg}');
+
+  print(MYPACKAGE_MYMESSAGE);
+  var a = [mymessage.MyMessage];
+  print("a: ${a}");
 }
