@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+message MyMessage {
+  // Regular fields
+  int32 id = 1;
+  string name = 2;
+
+  // Using oneof to specify that only one field can be set
+  oneof data {
+    string text = 3;
+    int32 number = 4;
+    bool flag = 5;
+  }
+}
