@@ -19,4 +19,7 @@ void main(List<String> arguments) {
   print(MYPACKAGE_MYMESSAGE);
   var a = [mymessage.MyMessage];
   print("a: ${a}");
+
+  String typeName = mymessage.MyMessage().info_.qualifiedMessageName;
+  print('Message type name: $typeName');
 }
