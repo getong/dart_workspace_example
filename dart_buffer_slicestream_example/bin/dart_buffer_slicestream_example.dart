@@ -1,7 +1,6 @@
 import 'package:buffer/buffer.dart';
 import 'dart:async';
 import 'dart:typed_data';
-import 'package:test/test.dart';
 
 void main(List<String> arguments) async {
   // print('Hello world: ${dart_buffer_slicestream_example.calculate()}!');
