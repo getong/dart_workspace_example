@@ -1,2 +1,87 @@
 A sample command-line application with an entrypoint in =bin/=, library
 code in =lib/=, and example unit test in =test/=.
+
+#+TITLE: Dart Isolate Examples
+#+AUTHOR: Dart Project
+#+DATE: 2024
+
+* Overview
+
+This project demonstrates various patterns for using Dart isolates for concurrent programming. Isolates in Dart provide true parallelism by running in separate memory spaces, making them ideal for CPU-intensive tasks and I/O operations that shouldn't block the main thread.
+
+* Features Demonstrated
+
+** File Processing
+- Asynchronous file reading and JSON parsing in isolates
+- Stream-based communication for processing multiple files
+- Error handling for file system and JSON parsing errors
+
+** CPU-Intensive Computations
+- Prime number calculation using Sieve of Eratosthenes
+- Performance comparison with main thread execution
+- Memory isolation benefits for large computations
+
+** Bidirectional Communication
+- Calculator isolate with request-response pattern
+- Command-based isolate communication
+- Resource management and proper cleanup
+
+** Error Handling
+- Exception propagation from isolates
+- Timeout handling for long-running operations
+- Graceful isolate shutdown
+
+* Project Structure
+
+#+BEGIN_EXAMPLE
+long_running_isolate/
+├── bin/
+│   └── long_running_isolate.dart    # Main examples and isolate implementations
+├── lib/                             # Library code (if any)
+├── test/                           # Unit tests
+├── pubspec.yaml                    # Project dependencies
+└── README.org                      # This documentation
+#+END_EXAMPLE
+
+* Running the Examples
+
+To run all isolate examples:
+
+#+BEGIN_SRC bash
+dart run bin/long_running_isolate.dart
+#+END_SRC
+
+* Key Concepts Demonstrated
+
+** Isolate Communication Patterns
+
+1. *One-way Communication*: Main isolate sends data, spawned isolate processes and exits
+2. *Stream-based Communication*: Continuous data flow between isolates
+3. *Request-Response Pattern*: Bidirectional communication with correlation IDs
+
+** Performance Considerations
+
+- Isolates have startup overhead
+- Message passing involves serialization
+- Best for CPU-intensive or I/O-bound tasks
+- Memory isolation prevents shared state issues
+
+** Best Practices
+
+- Always handle errors in isolate communication
+- Implement proper cleanup and resource disposal
+- Use appropriate communication patterns for your use case
+- Consider isolate pool patterns for frequent operations
+
+* Dependencies
+
+- =dart:isolate= - Core isolate functionality
+- =dart:async= - Asynchronous programming support
+- =package:async= - Additional async utilities (StreamQueue)
+
+* Learning Resources
+
+- [[https://dart.dev/guides/language/concurrency][Dart Concurrency Guide]]
+- [[https://api.dart.dev/stable/dart-isolate/dart-isolate-library.html][Dart Isolate API Documentation]]
+- [[https://dart.dev/codelabs/async-await][Async/Await Codelab]]
+#+END_EXAMPLE
