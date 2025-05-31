@@ -13,6 +13,7 @@
 /// - CPU-intensive computations
 /// - Error handling and timeouts
 /// - Bidirectional communication
+/// - Using compute() for simplified isolate operations
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -20,6 +21,8 @@ import 'dart:isolate';
 import 'dart:math';
 
 import 'package:async/async.dart';
+// Note: compute() is available in Flutter's foundation library
+// For pure Dart projects, we'll implement a similar pattern
 
 const filenames = [
   'json_01.json',
@@ -43,6 +46,9 @@ void main() async {
 
   print('\n4. Error Handling Example:');
   await _demonstrateErrorHandling();
+
+  print('\n5. Compute-style Function Example:');
+  await _demonstrateComputePattern();
 }
 
 /// Demonstrates file processing using isolates
@@ -91,6 +97,73 @@ Future<void> _demonstrateErrorHandling() async {
   } catch (e) {
     print('Caught error from isolate: $e');
   }
+}
+
+/// Demonstrates a Flutter-style compute() pattern for Dart
+Future<void> _demonstrateComputePattern() async {
+  print('Computing factorial of 20 using compute-style pattern...');
+
+  final result = await compute(_computeFactorial, 20);
+  print('20! = $result');
+
+  print('Computing Fibonacci sequence using compute-style pattern...');
+  final fibResult = await compute(_computeFibonacci, 30);
+  print('Fibonacci(30) = $fibResult');
+}
+
+/// A simplified compute-like function for pure Dart projects
+/// Similar to Flutter's compute() but implemented using basic isolates
+Future<R> compute<Q, R>(R Function(Q) callback, Q message) async {
+  final receivePort = ReceivePort();
+  await Isolate.spawn(_computeIsolateEntry, [receivePort.sendPort, callback, message]);
+
+  final result = await receivePort.first;
+  if (result is _ComputeError) {
+    throw Exception(result.message);
+  }
+
+  return result as R;
+}
+
+/// Isolate entry point for compute-style operations
+void _computeIsolateEntry<Q, R>(List<dynamic> args) {
+  final SendPort sendPort = args[0];
+  final R Function(Q) callback = args[1];
+  final Q message = args[2];
+
+  try {
+    final result = callback(message);
+    sendPort.send(result);
+  } catch (e) {
+    sendPort.send(_ComputeError(e.toString()));
+  }
+
+  Isolate.exit();
+}
+
+/// Error wrapper for compute operations
+class _ComputeError {
+  final String message;
+  _ComputeError(this.message);
+}
+
+/// Top-level function for computing factorial (required for isolates)
+int _computeFactorial(int n) {
+  if (n <= 1) return 1;
+  return n * _computeFactorial(n - 1);
+}
+
+/// Top-level function for computing Fibonacci numbers
+int _computeFibonacci(int n) {
+  if (n <= 1) return n;
+
+  int a = 0, b = 1;
+  for (int i = 2; i <= n; i++) {
+    int temp = a + b;
+    a = b;
+    b = temp;
+  }
+  return b;
 }
 
 /// Spawns an isolate and asynchronously sends a list of filenames for it to
