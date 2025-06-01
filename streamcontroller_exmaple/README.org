@@ -8,6 +8,7 @@ code in =lib/=, and example unit test in =test/=.
 This project demonstrates various StreamController patterns in Dart, including:
 - Basic stream creation and listening
 - Stream transformations
+- Broadcast streams with multiple listeners
 - Periodic stream generation
 - Proper resource cleanup
 
@@ -24,6 +25,7 @@ This will execute the main StreamController example showing:
 - Adding data to streams
 - Listening to stream events
 - Stream transformations (mapping)
+- Broadcast streams with multiple listeners
 - Proper cleanup of resources
 
 *** Key Features Demonstrated
@@ -41,6 +43,12 @@ This will execute the main StreamController example showing:
 **** Periodic Streams
 - Creating time-based streams with =Timer.periodic=
 - Proper lifecycle management with =onListen= and =onCancel=
+
+**** Broadcast StreamController
+- Creating a =StreamController<T>.broadcast()= for multiple listeners
+- Adding multiple subscriptions to the same stream
+- Dynamic listener management (adding/removing listeners)
+- Broadcasting data to all active listeners simultaneously
 
 *** Library Functions
 
@@ -66,4 +74,34 @@ Doubled: 4
 Doubled: 6
 Doubled: 8
 Doubled: 10
+
+Broadcast StreamController example:
+Broadcasting data...
+Listener 1 received: 10
+Listener 2 received: 10
+Listener 3 received: 10
+Listener 1 received: 20
+Listener 2 received: 20
+Listener 3 received: 20
+Listener 1 received: 30
+Listener 2 received: 30
+Listener 3 received: 30
+
+Removing listener 2...
+Listener 1 received: 40
+Listener 3 received: 40
+Broadcast example completed
 #+end_example
+
+** StreamController Types
+
+*** Single Subscription Streams
+- Default =StreamController()= allows only one listener
+- Attempting to add multiple listeners throws an exception
+- Suitable for point-to-point communication
+
+*** Broadcast Streams
+- =StreamController.broadcast()= allows multiple listeners
+- Each listener receives all events independently
+- Suitable for event broadcasting scenarios
+- Listeners can be added/removed dynamically
