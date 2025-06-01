@@ -1,6 +1,7 @@
 // import 'package:bloc_transition_example/bloc_transition_example.dart' as bloc_transition_example;
 
 import 'package:bloc/bloc.dart';
+
 sealed class CounterEvent {}
 
 final class CounterIncrementPressed extends CounterEvent {}
@@ -23,7 +24,6 @@ class CounterBloc extends Bloc<CounterEvent, int> {
   }
 }
 
-
 class SimpleBlocObserver extends BlocObserver {
   @override
   void onChange(BlocBase bloc, Change change) {
@@ -44,11 +44,11 @@ class SimpleBlocObserver extends BlocObserver {
   }
 }
 
-
 void main(List<String> arguments) async {
   // print('Hello world: ${bloc_transition_example.calculate()}!');
   Bloc.observer = SimpleBlocObserver();
   CounterBloc()
-  ..add(CounterIncrementPressed())
-  ..close();
+    ..add(CounterIncrementPressed())
+    ..add(CounterIncrementPressed())
+    ..close();
 }
