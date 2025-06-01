@@ -1,0 +1,69 @@
+* StreamController Example
+
+A sample command-line application with an entrypoint in =bin/=, library
+code in =lib/=, and example unit test in =test/=.
+
+** Overview
+
+This project demonstrates various StreamController patterns in Dart, including:
+- Basic stream creation and listening
+- Stream transformations
+- Periodic stream generation
+- Proper resource cleanup
+
+** Usage
+
+*** Running the Example
+
+#+begin_src bash
+dart run
+#+end_src
+
+This will execute the main StreamController example showing:
+- Creating a StreamController
+- Adding data to streams
+- Listening to stream events
+- Stream transformations (mapping)
+- Proper cleanup of resources
+
+*** Key Features Demonstrated
+
+**** Basic StreamController Operations
+- Creating a =StreamController<String>=
+- Adding data with =controller.add()=
+- Listening with =controller.stream.listen()=
+- Closing streams with =controller.close()=
+
+**** Stream Transformations
+- Using =map()= to transform stream data
+- Chaining stream operations
+
+**** Periodic Streams
+- Creating time-based streams with =Timer.periodic=
+- Proper lifecycle management with =onListen= and =onCancel=
+
+*** Library Functions
+
+The =lib/streamcontroller_exmaple.dart= provides utility functions:
+
+- =runStreamExample()= - Demonstrates stream transformations
+- =createController<T>()= - Generic controller factory
+- =createPeriodicStream<T>()= - Creates time-based streams
+
+*** Example Output
+
+#+begin_example
+StreamController Example
+
+Received: Hello
+Received: World
+Received: StreamController
+Stream closed
+
+Library example:
+Doubled: 2
+Doubled: 4
+Doubled: 6
+Doubled: 8
+Doubled: 10
+#+end_example
